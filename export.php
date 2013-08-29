@@ -50,8 +50,8 @@ $postsPath = $paramters['directory'];
 
 if(!file_exists($postsPath)){ mkdir($postsPath); }
 
-#$postsPath .= '/backup_'.date('Y-m-d_H-i-s');
-#if(!file_exists($postsPath)){ mkdir($postsPath); }
+$postsPath .= '/backup_'.date('Y-m-d_H-i-s');
+if(!file_exists($postsPath)){ mkdir($postsPath); }
 
 $dumper = new Dumper();
 
