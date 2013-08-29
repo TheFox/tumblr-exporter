@@ -77,7 +77,7 @@ foreach($client->getUserInfo()->user->blogs as $blog){
 			print "\t\t post: ".$post->id.", ".$post->type." \n";
 			
 			$postDate = new DateTime($post->date);
-			
+			$postDate->setTimezone(new DateTimeZone('Europe/Vienna'));
 			
 			#file_put_contents($blogPostsDirPath.'/post_'.$post->id.'_'.$postDate->format('Y-m-d_H-i-s').'_'.$post->type.'.yml', $dumper->dump((array)$post));
 			
