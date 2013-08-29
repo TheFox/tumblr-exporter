@@ -1,0 +1,6 @@
+{
+	"require": {
+		"tumblr/tumblr": "v0.1.1",
+		"symfony/yaml": "v2.3.3"
+	}
+}
