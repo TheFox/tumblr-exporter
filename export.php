@@ -63,10 +63,8 @@ foreach($client->getUserInfo()->user->blogs as $blog){
 	
 	$blogDirPath = $postsPath.'/'.$blogName;
 	$blogPostsDirPath = $blogDirPath.'/posts';
-	if(!file_exists($blogDirPath)){
-		mkdir($blogDirPath);
-		mkdir($blogPostsDirPath);
-	}
+	if(!file_exists($blogDirPath)){ mkdir($blogDirPath); }
+	if(!file_exists($blogPostsDirPath)){ mkdir($blogPostsDirPath); }
 	
 	$blogInfo = $client->getBlogInfo($blogName);
 	
