@@ -2,3 +2,4 @@
 *.sqlite
 vendor
 parameters.yml
+backups
