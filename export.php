@@ -78,7 +78,49 @@ foreach($client->getUserInfo()->user->blogs as $blog){
 			
 			$postDate = new DateTime($post->date);
 			
-			file_put_contents($blogPostsDirPath.'/post_'.$post->id.'_'.$postDate->format('Y-m-d_H-i-s').'_'.$post->type.'.yml', $dumper->dump((array)$post));
+			
+			#file_put_contents($blogPostsDirPath.'/post_'.$post->id.'_'.$postDate->format('Y-m-d_H-i-s').'_'.$post->type.'.yml', $dumper->dump((array)$post));
+			
+			#var_export((array)$post);
+			
+			$title = '';
+			$content = '';
+			if($post->type == 'text'){
+				$title = $post->title;
+				$content = $post->body;
+			}
+			elseif($post->type == 'link'){
+				$title = $post->title;
+				$content = $post->description;
+			}
+			elseif($post->type == 'quote'){
+				$title = $post->text;
+				$content = $post->text;
+			}
+			elseif($post->type == 'photo'){
+				$title = $post->caption;
+			}
+			else{
+				print "ERROR: found type '".$post->type."'\n";
+				exit();
+			}
+			
+			$titleFilename = $title;
+			$titleFilename = strtolower($titleFilename);
+			$titleFilename = preg_replace('/[^-a-z0-9]+/', '.', $titleFilename);
+			$titleFilename = preg_replace('/[^-a-z0-9]$/', '', $titleFilename);
+			
+			$md = '';
+			$md .= 'Date: '.$postDate->format('Y-m-d H:i:s')."\n";
+			$md .= 'Title: '.$title."\n";
+			$md .= 'Tags: '.join(',', $post->tags)."\n";
+			if($post->type == 'link'){
+				$md .= 'Link: '.$post->url."\n";
+			}
+			$md .= "\n";
+			$md .= $content."\n";
+			
+			file_put_contents($blogPostsDirPath.'/'.$postDate->format('ymd_His').'_'.$titleFilename.'.md', $md);
 			
 			#break;
 			if($exit) break;
@@ -88,7 +130,7 @@ foreach($client->getUserInfo()->user->blogs as $blog){
 		if($exit) break;
 	}
 	
-	#break;
+	break;
 }
 
 
