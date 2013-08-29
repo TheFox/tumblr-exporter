@@ -99,9 +99,11 @@ foreach($client->getUserInfo()->user->blogs as $blog){
 			}
 			elseif($post->type == 'photo'){
 				$title = $post->caption;
+				$content = '!['.$title.']('.$post->photos[0]->original_size->url.')';
 			}
 			else{
 				print "ERROR: found type '".$post->type."'\n";
+				#var_export($post);
 				exit();
 			}
 			
