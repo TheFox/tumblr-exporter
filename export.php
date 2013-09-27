@@ -4,10 +4,8 @@ $DEBUG = 0;
 
 if(PHP_SAPI != 'cli') die('ERROR: You must run this script under shell.');
 
-chdir(dirname(__FILE__));
-
 declare(ticks = 1);
-require 'vendor/autoload.php';
+require __DIR__.'/vendor/autoload.php';
 
 use \Symfony\Component\Yaml\Yaml;
 use \Symfony\Component\Yaml\Dumper;
@@ -19,7 +17,7 @@ if(function_exists('pcntl_signal')){
 	pcntl_signal(SIGINT, 'signalHandler');
 }
 
-$paramtersFilePath = 'parameters.yml';
+$paramtersFilePath = __DIR__.'/parameters.yml';
 if(!file_exists($paramtersFilePath)){
 	die('ERROR: File "'.$paramtersFilePath.'" not found.'."\n");
 }
